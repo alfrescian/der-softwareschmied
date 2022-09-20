@@ -1,17 +1,15 @@
 ---
 import { generateImage } from "astro-eleventy-img";
 import { Icon } from "astro-icon";
-import Starfield from "~/components/starfield.astro";
-import HeroImage from "~/components/hero-image.astro";
 
 const widths = [450, 800];
 const sizes = "(min-width: 640px) 42vw, 67vw";
 
-const { webp, avif, png } = generateImage("src/assets/astronaut.png", {
+const { webp, avif, png } = generateImage("src/assets/logo.png", {
   widths,
   formats: ["webp", "avif", "png"],
-  outputDir: "public/assets/images/astronaut",
-  urlPath: "/assets/images/astronaut",
+  outputDir: "public/assets/images/schmied",
+  urlPath: "/assets/images/schmied",
 });
 
 const avifSrcset = avif.map(({ srcset }) => srcset).join(",");
@@ -19,16 +17,13 @@ const webpSrcset = webp.map(({ srcset }) => srcset).join(",");
 const pngSrcset = png.map(({ srcset }) => srcset).join(",");
 ---
 
-<section class="relative h-full bg-black">
-  <Starfield />
-  <div id="splash-bg-fallback" class="absolute inset-0 hidden opacity-40">
-    <HeroImage />
-  </div>
-  <div class="relative grid h-full sm:grid-cols-2 place-items-center">
+<section class="relative h-full w-full bg-black">
+  <div
+    class="relative grid h-full w-full sm:grid-cols-2 place-items-center gap-10"
+  >
     <h2
-      class="flex flex-col self-end gap-2 sm:gap-4 sm:self-auto sm:justify-self-end"
+      class="flex flex-col self-end gap-4 sm:gap-10 sm:self-auto sm:justify-self-end"
     >
-      <Icon name="logomark" class="h-24 text-white md:h-32" />
       <div
         class="font-extrabold tracking-tighter text-center text-4xl gradient-text"
       >
@@ -38,9 +33,13 @@ const pngSrcset = png.map(({ srcset }) => srcset).join(",");
       <div class="grid grid-cols-1">
         <a
           href="mailto://jan@der-softwareschmied.de"
-          class="flex items-center justify-center gap-3 px-6 py-4 border-2 border-current"
+          class="group flex items-center justify-center gap-3 px-6 py-4 border-2 border-teal-300 text-teal-300 hover:border-purple-500 hover:bg-purple-500 hover:text-white"
         >
-          <Icon pack="mdi" name="telescope" class="h-8" />
+          <Icon
+            pack="mdi"
+            name="file-account"
+            class="h-8 group-hover:animate-bounce"
+          />
           <span>Mein Resume/CV anfragen</span>
         </a>
       </div>
@@ -53,23 +52,15 @@ const pngSrcset = png.map(({ srcset }) => srcset).join(",");
       <source type="image/webp" srcset={webpSrcset} {sizes} />
       <source type="image/png" srcset={pngSrcset} {sizes} />
       <img
-        class="object-cover w-full h-full"
+        class="object-contain w-full h-full max-h-[50vh]"
         src={png[0].url}
         width={png[0].width}
         height={png[0].height}
-        alt="A floating astronaut in a space suit"
+        alt="A blacksmith"
       />
     </picture>
   </div>
 </section>
-
-<noscript>
-  <style>
-    #splash-bg-fallback {
-      display: block;
-    }
-  </style>
-</noscript>
 
 <style>
   @keyframes float {
@@ -89,14 +80,6 @@ const pngSrcset = png.map(({ srcset }) => srcset).join(",");
   @media (prefers-reduced-motion: reduce) {
     picture {
       @apply animate-none;
-    }
-
-    :global(#starfield) {
-      @apply hidden;
-    }
-
-    #splash-bg-fallback {
-      @apply block;
     }
   }
 </style>
