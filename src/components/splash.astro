@@ -5,11 +5,11 @@ import { Icon } from "astro-icon";
 const widths = [450, 800];
 const sizes = "(min-width: 640px) 42vw, 67vw";
 
-const { webp, avif, png } = generateImage("src/assets/logo.png", {
+const { webp, avif, png } = generateImage("src/assets/me.png", {
   widths,
   formats: ["webp", "avif", "png"],
-  outputDir: "public/assets/images/schmied",
-  urlPath: "/assets/images/schmied",
+  outputDir: "public/assets/images/me",
+  urlPath: "/assets/images/me",
 });
 
 const avifSrcset = avif.map(({ srcset }) => srcset).join(",");
@@ -56,7 +56,8 @@ const pngSrcset = png.map(({ srcset }) => srcset).join(",");
         src={png[0].url}
         width={png[0].width}
         height={png[0].height}
-        alt="A blacksmith"
+        alt="Cute male baby blacksmith in a good mood, wearing a hoodie, MacBook in one hand 
+        , light teal, light purple , logo, digital art, drawing, in a dark circle as the background, vibrant, cheerful"
       />
     </picture>
   </div>
